@@ -27,11 +27,20 @@ app.get('/healthcheck', (req, res) => {
 app.get('/integration', (req, res) => {
     getPerson()
         .then(person => {
-            console.log('deu certo')
+            console.log('deu certo Person')
             res.json(person);
         })
         .catch(err => {
-            console.log('deu erro')
+            console.log('deu erro Person')
+            res.json(err);
+        })
+    getCripto()
+        .then(cripto => {
+            console.log('deu certo Cripto')
+            res.json(cripto);
+        })
+        .catch(err => {
+            console.log('deu erro Cripto')
             res.json(err);
         })
 })
@@ -51,6 +60,20 @@ const getPerson = () => {
         })
         .catch(err => {
             console.log('terminou o request com erro')
+            console.log(err)
+            reject(err);
+        })
+    });
+}
+const getCripto = () => {
+    return new Promise((resolve, reject) => {
+        axios.get('http://demo-alb-993073808.us-east-1.elb.amazonaws.com/hasher/sha1/cobrinha')
+        .then(cripto => {
+            console.log('terminou o request com sucesso Cripto')
+            resolve(cripto.data);
+        })
+        .catch(err => {
+            console.log('terminou o request com erro Cripto')
             console.log(err)
             reject(err);
         })
