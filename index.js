@@ -31,7 +31,7 @@ app.get('/integration', (req, res) => {
             res.json(person);
         })
         .catch(err => {
-            console.log('deu merda aqui')
+            console.log('deu erro')
             res.json(err);
         })
 })
